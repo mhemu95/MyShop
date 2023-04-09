@@ -31,7 +31,7 @@ class Cart:
         # mark the session as "modified" to make sure it gets saved
         self.session.modified = True
 
-    def remove(self):
+    def remove(self, product):
         """
         Remove a product from the cart
         """
@@ -47,7 +47,7 @@ class Cart:
         """
         product_ids = self.cart.keys()
         # get the product objects and add them to the cart
-        products = product.objects.filter(id__in=product_ids)
+        products = Product.objects.filter(id__in=product_ids)
         cart = self.cart.copy()
         for product in products:
             cart[str(product.id)]['product'] = product
